@@ -2,21 +2,32 @@ package mylogic;
 
 import javafx.scene.shape.Box;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by LG-2 on 6/6/2017.
  */
 public class Cuboid {
-    public int length,breadth,height;
+    public int length,breadth,height,id;
     public Point topLeftFront,topRightFront,topLeftRear,topRightRear,bottomLeftFront,bottomRightFront,bottomLeftRear,bottomRightRear;
+    public float[] color;
+    public static Random r;
+    public static int idCounter;
+    static{
+        r=new Random();
+        idCounter=0;
+    }
     public Cuboid(int length,int breadth,int height){
         this.length=length;
         this.breadth=breadth;
         this.height=height;
+        color=new float[]{(new Float(r.nextInt(255)+1)/255.0f),(new Float(r.nextInt(255)+1)/255.0f),(new Float(r.nextInt(255)+1)/255.0f)};
+        id=idCounter++;
     }
     public String toString(){
-        return "(L="+length+",B="+breadth+",H="+height+",BLR="+bottomLeftRear+",BRR="+bottomRightRear+",BRF="+bottomRightFront+",BLF="+bottomLeftFront+",TLF="+topLeftFront+",TLR="+topLeftRear+",TRR="+topRightRear+",TRF="+topRightFront+")";
+        return "(L="+length+",B="+breadth+",H="+height+",BLR="+bottomLeftRear+",BRR="+bottomRightRear+",BRF="+bottomRightFront+",BLF="+bottomLeftFront+",TLF="+topLeftFront+",TLR="+topLeftRear+",TRR="+topRightRear+",TRF="+topRightFront+" COLOR=("+color[0]+","+color[1]+","+color[2]+"))";
     }
     public void rotate(){
         int temp=this.length;
@@ -39,6 +50,8 @@ public class Cuboid {
     public int getRear(){
         return this.topLeftRear.z;
     }
+
+
     public void setBottomLeftRear(Point bottomLeftRear){
         this.bottomLeftRear=bottomLeftRear;
         this.bottomRightRear=new Point(this.bottomLeftRear.x+length,this.bottomLeftRear.y,this.bottomLeftRear.z);
@@ -144,29 +157,5 @@ public class Cuboid {
             }
         }
         return intersects;
-    }
-    public static void main(String[] args) {
-//        Cuboid cuboid=new Cuboid(1,1,1);
-//        Box box=new Box(20,20,20);
-
-//        cuboid.setBottomLeftRear(new Point(0,0,0));
-//        cuboid.setBottomRightRear(new Point(1,0,0));
-//        cuboid.setBottomRightFront(new Point(1,0,1));
-//        cuboid.setBottomLeftFront(new Point(0,0,1));
-//        cuboid.setTopLeftRear(new Point(0,1,0));
-//        cuboid.setTopRightRear(new Point(1,1,0));
-//        cuboid.setTopRightFront(new Point(1,1,1));
-//        cuboid.setTopLeftFront(new Point(0,1,1));
-//        System.out.println(cuboid);
-//        cuboid.setBottomLeftRear(new Point(0,0,1));
-//        Cuboid cuboid1=new Cuboid(2,2,2);
-//        cuboid1.setBottomLeftRear(new Point(0,1,1));
-//        System.out.println("c1="+cuboid);
-//        System.out.println("c2="+cuboid1);
-//        System.out.println(cuboid.checkCollision(cuboid1));
-
-
-
-
     }
 }
